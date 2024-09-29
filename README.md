@@ -15,6 +15,77 @@ Tabela de estudos e contexto de  SQL :
 | **Indexação de Tabelas**       | Melhorar a performance nas consultas criando índices para colunas específicas.                         | `CREATE INDEX idx_nome ON tabela (coluna);`                                               |
 | **Criação de Views**           | Criar uma visualização personalizada dos dados para facilitar consultas frequentes.                    | `CREATE VIEW nome_view AS SELECT coluna1, coluna2 FROM tabela WHERE condicao;`            |
 
+  ## cte 
+
+  -- Exemplo de uso de múltiplas CTEs (6 CTEs)
+WITH cte1 AS (
+  -- Definição da primeira CTE
+  SELECT column1, column2 
+  FROM table1
+  WHERE condition1
+),
+cte2 AS (
+  -- Definição da segunda CTE
+  SELECT column1, column3 
+  FROM table2
+  WHERE condition2
+),
+cte3 AS (
+  -- Definição da terceira CTE
+  SELECT column4, column5 
+  FROM table3
+  WHERE condition3
+),
+cte4 AS (
+  -- Definição da quarta CTE
+  SELECT column6, column7 
+  FROM cte1
+  JOIN cte2 ON cte1.column1 = cte2.column1
+),
+cte5 AS (
+  -- Definição da quinta CTE
+  SELECT column8, column9 
+  FROM cte3
+  WHERE condition4
+),
+cte6 AS (
+  -- Definição da sexta CTE
+  SELECT column10, column11 
+  FROM cte4
+  JOIN cte5 ON cte4.column6 = cte5.column8
+)
+-- Consulta final usando as CTEs definidas acima
+SELECT * 
+FROM cte6
+WHERE final_condition;
+
+
+
+# subquery
+
+-- Exemplo de uso de 1 subquery
+SELECT column1, column2 
+FROM (
+  -- Subquery
+  SELECT column1, column3 
+  FROM table1
+  WHERE condition1
+) AS subquery
+WHERE condition2;
+
+
+#subquery correlacionada
+
+-- Exemplo de uso de uma subquery correlacionada
+SELECT column1, column2 
+FROM table1 t1
+WHERE column3 > (
+  -- Subquery correlacionada
+  SELECT AVG(column3) 
+  FROM table2 t2
+  WHERE t2.foreign_key = t1.primary_key
+);
+
 
 
 
